@@ -53,3 +53,15 @@ Fire Shooter is a high-octane, browser‑based multiplayer shooting game built w
 ```bash
 git clone https://github.com/yourusername/fire-shooter.git
 cd fire-shooter
+
+
+🎮 How to Play
+Action	Control
+Move:	W A S D
+Aim	Mouse cursor
+Shoot:	Left click
+Reload:	R
+Throw grenade:	G (if purchased)
+Jetpack boost:	Shift (if purchased)
+
+Objective: Survive the time limit, kill enemies, defeat the boss (spawns after 10 kills). Each mission rewards coins and XP. In multiplayer rooms, your score is compared with teammates/opponents.
