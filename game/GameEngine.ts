@@ -1,5 +1,3 @@
-// src/game/GameEngine.ts
-
 export interface Vector2 {
   x: number;
   y: number;
@@ -133,7 +131,6 @@ export class GameEngine {
 
   generateWalls(mapType: string): Vector2[] {
     const walls: Vector2[] = [];
-    // Boundary walls
     for (let i = 0; i < this.state.mapWidth; i += 50) {
       walls.push({ x: i, y: 0 });
       walls.push({ x: i, y: this.state.mapHeight - 50 });
@@ -142,7 +139,6 @@ export class GameEngine {
       walls.push({ x: 0, y: i });
       walls.push({ x: this.state.mapWidth - 50, y: i });
     }
-    // Map-specific obstacles
     const obstacleCount = { industrial: 15, neon_city: 20, nexus_hq: 12, warzone: 25 }[mapType] || 10;
     for (let i = 0; i < obstacleCount; i++) {
       walls.push({
@@ -243,8 +239,6 @@ export class GameEngine {
 
     this.state.player.ammo--;
     this.state.player.shootCooldown = 10;
-
-    // Muzzle flash
     this.addParticle(this.state.player.pos, '#ffaa00', 5);
   }
 
@@ -308,7 +302,6 @@ export class GameEngine {
     const newX = this.state.player.pos.x + moveX * speed;
     const newY = this.state.player.pos.y + moveY * speed;
 
-    // Collision with walls
     let collides = false;
     for (const wall of this.state.walls) {
       if (Math.abs(newX - wall.x) < 30 && Math.abs(newY - wall.y) < 30) {
@@ -500,7 +493,6 @@ export class GameEngine {
     this.ctx.fillStyle = gradients[this.state.mapType] || gradients.industrial;
     this.ctx.fillRect(0, 0, this.state.mapWidth, this.state.mapHeight);
 
-    // Draw walls
     for (const wall of this.state.walls) {
       this.ctx.fillStyle = 'rgba(80, 80, 100, 0.7)';
       this.ctx.shadowBlur = 10;
