@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-fire-dark text-white overflow-x-hidden;
+    font-family: 'Inter', sans-serif;
+  }
+  
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-gray-900;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-fire-accent rounded-full;
+  }
+}
+
+@layer utilities {
+  .bg-gradient-fire {
+    background: linear-gradient(135deg, #ff3300, #ff6600, #ffcc00);
+  }
+  .text-gradient-fire {
+    @apply bg-gradient-fire bg-clip-text text-transparent;
+  }
+}
