@@ -27,7 +27,6 @@ export const ChatBox = ({ roomId, type }: ChatBoxProps) => {
       })
       .subscribe();
       
-    // Load existing messages
     const loadMessages = async () => {
       let query = supabase.from('messages').select('*').order('created_at', { ascending: true }).limit(50);
       if (type === 'global') {
