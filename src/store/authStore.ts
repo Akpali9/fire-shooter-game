@@ -26,8 +26,7 @@ export const useAuthStore = create<AuthState>((set, get) => ({
     } else {
       set({ loading: false });
     }
-    
-    supabase.auth.onAuthStateChange(async (event, session) => {
+    supabase.auth.onAuthStateChange(async (_, session) => {
       if (session?.user) {
         const { data: profile } = await supabase.from('profiles').select('*').eq('id', session.user.id).single();
         set({ user: session.user, profile });
@@ -58,7 +57,6 @@ export const useAuthStore = create<AuthState>((set, get) => ({
     if (!error) {
       await supabase.auth.signInWithPassword({ email: guestEmail, password: guestPass });
     } else {
-      // If guest exists, try sign in
       await supabase.auth.signInWithPassword({ email: guestEmail, password: guestPass });
     }
   },
