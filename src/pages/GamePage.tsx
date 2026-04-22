@@ -25,7 +25,6 @@ export default function GamePage() {
       setResult(res);
       setShowResults(true);
       
-      // Save session to Supabase
       await supabase.from('game_sessions').insert({
         player_id: profile.id,
         mission_id: missionId,
@@ -36,7 +35,6 @@ export default function GamePage() {
         room_id: roomId || null
       });
       
-      // Update profile stats
       const { data: profileData } = await supabase.from('profiles').select('kills, deaths, xp, coins').eq('id', profile.id).single();
       const newKills = (profileData?.kills || 0) + res.kills;
       const newDeaths = (profileData?.deaths || 0) + (res.victory ? 0 : 1);
@@ -57,22 +55,16 @@ export default function GamePage() {
   return (
     <div className="relative w-full h-screen overflow-hidden bg-black">
       <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" style={{ cursor: 'none' }} />
-      
-      {/* HUD Overlay */}
       <div className="absolute top-4 left-4 z-10 flex gap-2">
         <button onClick={() => navigate('/lobby')} className="bg-black/50 backdrop-blur-md p-2 rounded-lg border border-fire-border">
           <ArrowLeft className="w-5 h-5" />
         </button>
       </div>
-      
-      {/* Chat (only if in multiplayer room) */}
       {roomId && (
         <div className="absolute bottom-4 left-4 w-80 h-96 z-10">
           <ChatBox roomId={roomId} type="team" />
         </div>
       )}
-      
-      {/* Results Modal */}
       {showResults && (
         <div className="absolute inset-0 bg-black/80 flex items-center justify-center z-20">
           <div className="bg-fire-card rounded-xl p-8 text-center max-w-md border border-fire-border">
